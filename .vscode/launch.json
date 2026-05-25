@@ -1,0 +1,28 @@
+{
+    // Use o IntelliSense para saber mais sobre os atributos possíveis.
+    // Focalizar para exibir as descrições dos atributos existentes.
+    // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "NotificacaoServiceApplication",
+            "request": "launch",
+            "mainClass": "com.example.notificacao_service.NotificacaoServiceApplication",
+            "projectName": "notificacao-service"
+        },
+        {
+            "type": "java",
+            "name": "PedidoServiceApplication",
+            "request": "launch",
+            "mainClass": "com.example.pedido_service.PedidoServiceApplication",
+            "projectName": "pedido-service"
+        }
+    ]
+}
