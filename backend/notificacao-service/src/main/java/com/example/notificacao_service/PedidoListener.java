@@ -10,7 +10,7 @@ public class PedidoListener {
         System.out.println("📥 [Kafka] Novo evento capturado pelo Consumidor!");
         System.out.println("📦 Produto: " + pedido.produto());
         System.out.println("💰 Valor: R$ " + pedido.valor());
-        System.out.println("✅ Notificação gerada com sucesso no Java 26!");
+        System.out.println("✅ Notificação gerada com sucesso no Java 25!");
         System.out.println("--------------------------------------------------");
     }
 }
