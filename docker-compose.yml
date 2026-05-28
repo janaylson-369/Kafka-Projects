@@ -27,3 +27,25 @@ services:
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
     depends_on:
       - kafka
+
+pedido-service:
+    build: ./backend/pedido-service
+    container_name: pedido-service
+    ports:
+      - "8080:8080" # Permite ao frontend do seu Windows acessar o endpoint do produtor
+    environment:
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:29092 # Roteamento interno do Docker para o broker
+      - SERVER_PORT=8080
+    depends_on:
+      - kafka
+
+  notificacao-service:
+    build: ./backend/notificacao-service
+    container_name: notificacao-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:29092 # Roteamento interno do Docker para o broker
+      - SERVER_PORT=8081
+    depends_on:
+      - kafka
