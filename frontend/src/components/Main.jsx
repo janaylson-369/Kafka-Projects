@@ -1,7 +1,7 @@
 
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
-import './Card.css';
+import './Main.css';
 
 export default function Main() {
     const [produto, setProduto] = useState('');
