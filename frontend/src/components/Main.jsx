@@ -9,7 +9,7 @@ const [valor, setValor] = useState('');
             e.preventDefault();
             
             try {
-            const resposta = await fetch('http://localhost:8082/api/pedidos', {
+            const resposta = await fetch('http://localhost:8080/api/pedidos', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ produto, valor: parseFloat(valor) })

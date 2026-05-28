@@ -1,10 +1,10 @@
-# Estágio 1: Build da aplicação usando Java 25
 FROM eclipse-temurin:25-jdk-jammy AS build
 WORKDIR /app
 COPY . .
+RUN sed -i 's/\r$//' mvnw
+RUN chmod +x mvnw
 RUN ./mvnw clean package -DskipTests
 
-# Estágio 2: Execução leve
 FROM eclipse-temurin:25-jre-jammy
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar

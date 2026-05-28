@@ -28,7 +28,7 @@ services:
     depends_on:
       - kafka
 
-pedido-service:
+  pedido-service:
     build: ./backend/pedido-service
     container_name: pedido-service
     ports:
@@ -49,3 +49,13 @@ pedido-service:
       - SERVER_PORT=8081
     depends_on:
       - kafka
+
+  frontend:
+    build: ./frontend
+    container_name: frontend-app
+    ports:
+      - "3001:3001" # Mapeia a porta do container para o seu Windows
+    depends_on:
+      - kafka # Só liga o front depois que o Kafka estiver de pé
+      - pedido-service # Só liga o front depois que o produtor estiver de pé
+      - notificacao-service # Só liga o front depois que o consumidor estiver de pé
