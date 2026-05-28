@@ -1,5 +1,5 @@
 package com.example.pedido_service;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.http.ResponseEntity;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/pedidos")
-@CrossOrigin(origins = "http://localhost:3001") // Libera o acesso para o seu React
+@CrossOrigin(origins = "*") // Libera o acesso para o seu React
 public class PedidoController {
 
     @Autowired

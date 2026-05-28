@@ -5,29 +5,28 @@ export default function Main() {
 const [produto, setProduto] = useState('');
 const [valor, setValor] = useState('');
 
-const enviarPedido = async (e) => {
-        e.preventDefault();
-        
-        // Conexão direta com o Microserviço A (Spring Boot)
-        try {
-        const resposta = await fetch('http://localhost:8080/api/pedidos', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ produto, valor: parseFloat(valor) })
-        });
+    const enviarPedido = async (e) => {
+            e.preventDefault();
+            
+            try {
+            const resposta = await fetch('http://localhost:8080/api/pedidos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ produto, valor: parseFloat(valor) })
+            });
 
-        if (resposta.ok) {
-            alert(`Sucesso! Pedido de "${produto}" enviado ao Kafka.`);
-            setProduto('');
-            setValor('');
-        } else {
-            alert('Erro ao enviar pedido para o backend.');
-        }
-        } catch (erro) {
-            console.error(erro);
-            alert('O backend Spring Boot está desligado!');
-        }
-    };
+            if (resposta.ok) {
+                alert(`Sucesso! Pedido de "${produto}" enviado ao Kafka.`);
+                setProduto('');
+                setValor('');
+            } else {
+                alert('Erro ao enviar pedido para o backend.');
+            }
+            } catch (erro) {
+                console.error(erro);
+                alert('O backend Spring Boot está desligado!');
+            }
+        };
 
     return (
         <Container>
@@ -35,7 +34,7 @@ const enviarPedido = async (e) => {
             <Col>
             <Card>
                 <Card.Body>
-                <Card.Title>Painel de Pedidos Assíncronos</Card.Title>
+                <Card.Title>Painel de Pedidos</Card.Title>
                 <Form onSubmit={enviarPedido}>
                     <Form.Group controlId="formProduto">
                     <Form.Label>Item do Pedido</Form.Label>
