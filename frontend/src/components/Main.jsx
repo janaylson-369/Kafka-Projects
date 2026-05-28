@@ -1,40 +1,54 @@
-import { useState } from 'react';
+
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import { useState } from 'react';
+import './Card.css';
 
 export default function Main() {
-const [produto, setProduto] = useState('');
-const [valor, setValor] = useState('');
+    const [produto, setProduto] = useState('');
+    const [valor, setValor] = useState('');
+
+    // const enviarPedido = (e) => {
+    //     e.preventDefault();
+    //     console.log('Pedido'+ { produto, valor }+ 'enviado ao kafka');
+    // }
 
     const enviarPedido = async (e) => {
-            e.preventDefault();
-            
-            try {
-            const resposta = await fetch('http://localhost:8080/api/pedidos', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ produto, valor: parseFloat(valor) })
-            });
+    e.preventDefault();
 
-            if (resposta.ok) {
-                alert(`Sucesso! Pedido de "${produto}" enviado ao Kafka.`);
-                setProduto('');
-                setValor('');
-            } else {
-                alert('Erro ao enviar pedido para o backend.');
-            }
-            } catch (erro) {
-                console.error(erro);
-                alert('O backend Spring Boot está desligado!');
-            }
-        };
+    const pedido = {
+        produto: produto,
+        valor: parseInt(valor)
+    };
+
+    try {
+        // Envia os dados para o Microserviço de Compras
+        const response = await fetch('http://localhost:8080/api/pedidos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(pedido),
+        });
+
+        if (response.ok) {
+            alert('Pedido realizado com sucesso! Processando notificação...');
+            setProduto('');
+            setValor('');
+        } else {
+            alert('Erro ao enviar pedido.');
+        }
+    } catch (error) {
+        console.error('Erro na requisição:', error);
+    }
+};
 
     return (
-        <Container>
+        <Container className="justify-content-center " id="card-container">
         <Row>
             <Col>
             <Card>
                 <Card.Body>
-                <Card.Title>Painel de Pedidos</Card.Title>
+                <Card.Title>Painel de Pedidos Assíncronos</Card.Title>
                 <Form onSubmit={enviarPedido}>
                     <Form.Group controlId="formProduto">
                     <Form.Label>Item do Pedido</Form.Label>
@@ -56,7 +70,7 @@ const [valor, setValor] = useState('');
                     />
                     </Form.Group>
 
-                    <Button variant="primary" type="submit">
+                    <Button variant="primary" type="submit"  className='form-label'>
                     Disparar para o Kafka
                     </Button>
                 </Form>
