@@ -5,12 +5,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class PedidoListener {
     @KafkaListener(topics = "pedidos-novos", groupId = "grupo-seminario")
-    public void ouvirPedidos(PedidoRecord pedido) {
-        System.out.println("--------------------------------------------------");
-        System.out.println("📥 [Kafka] Novo evento capturado pelo Consumidor!");
-        System.out.println("📦 Produto: " + pedido.produto());
-        System.out.println("💰 Valor: R$ " + pedido.valor());
-        System.out.println("✅ Notificação gerada com sucesso no Java 25!");
-        System.out.println("--------------------------------------------------");
-    }
+    public void ouvirPedidos(String pedido) {
+        System.out.println("📥 Mensagem pura recebida: " + pedido);
+        // Aqui você pode adicionar lógica para processar o pedido e enviar notificações
+        System.out.println("✅ Notificação enviada para o pedido: " + pedido);}
 }
