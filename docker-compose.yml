@@ -1,7 +1,7 @@
 version: '3'
 services:
   kafka:
-    image: confluentinc/cp-kafka:7.6.0
+    image: apache/kafka:latest
     container_name: kafka-kraft
     ports:
       - "9092:9092"
